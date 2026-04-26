@@ -1,9 +1,32 @@
-import React from 'react'
-
+import React, { useEffect } from "react";
+import { useAuth } from "../context/AuthContext";
+import { BASE_URL } from "../api/Api";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 export default function Login() {
-    const {login}=useAuth()
+  const { login } = useAuth();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = searchParams.get("token");
+    if (token) {
+      login(token);
+      navigate("albums");
+    }
+  }, [searchParams, login, navigate]);
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${BASE_URL}/auth/google`;
+    // window.location.href = `${BASE_URL}/auth/google`;
+  };
+
   return (
-    <div>Login</div>
-  )
+    <div className="d-flex flex-column align-items-center mt-5">
+      <h2>Welcome to PhotoVault</h2>
+      <button className="btn btn-primary mt-3" onClick={handleGoogleLogin}>
+        Sign in with Google
+      </button>
+    </div>
+  );
 }
