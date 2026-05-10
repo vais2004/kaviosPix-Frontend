@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { getData, postData, putData } from "../api/Api";
+import AlbumCard from "../components/AlbumCard";
 
 export default function Albums() {
   const [albums, setAlbums] = useState([]);
