@@ -1,23 +1,35 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
+import Login from "./pages/Login";
+import Albums from "./pages/Albums";
+import AlbumDetails from "./pages/AlbumDetails";
+import AuthSuccess from "./components/AuthSuccess";
+import UploadForm from "./components/UploadForm";
 
 function App() {
+  const { token, loading } = useAuth();
+
+  if (loading) return <div>Loading...</div>;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/auth/success" element={<AuthSuccess />} />
+        <Route
+          path="/"
+          element={token ? <Navigate to="/albums" /> : <Login />}
+        />
+        <Route
+          path="/albums"
+          element={token ? <Albums /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/albums/:albumId"
+          element={token ? <AlbumDetail /> : <Navigate to="/" />}
+        />
+        <Route path="/albums/:albumId/upload" element={<UploadForm />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
