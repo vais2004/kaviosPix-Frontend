@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {FaTag,FaStar,FaTrash} from 'react-icons'
-import BASE_URL from "../api/Api";
+import { FaTag, FaStar, FaTrash } from "react-icons/fa";
+import { BASE_URL } from "../api/Api";
 import axios from "axios";
 
-export default function ImageGrid() {
+export default function ImageGrid({ images, albumId }) {
   const [imageList, setImageList] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
@@ -56,9 +56,7 @@ export default function ImageGrid() {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      const updatedList = imageList.filter.filter(
-        (img) => img.imageId !== imageId,
-      );
+      const updatedList = imageList.filter((img) => img.imageId !== imageId);
       setImageList(updatedList);
       setFavorites(updatedList.filter((img) => img.isFavorite));
       setFilteredImages(updatedList);
@@ -168,7 +166,7 @@ export default function ImageGrid() {
                   style={{ height: "200px", objectFit: "cover" }}
                 />
                 {/* ⭐ + 🗑️ */}
-                <div className="positive-absolute top-0 end-0 m-2 d-flex gap-2">
+                <div className="position-absolute top-0 end-0 m-2 d-flex gap-2">
                   <button
                     className="btn p-1 bg-light rounded-circle"
                     onClick={() => toggleFavorite(img.imageId, img.isFavorite)}>
@@ -239,10 +237,10 @@ function AddCommentForm({ onAddComment }) {
     setComment("");
   };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
-        className="form-control form-contro;-sm me-2"
+        className="form-control form-control-sm me-2"
         placeholder="Add a comment..."
         value={comment}
         onChange={(e) => setComment(e.target.value)}
