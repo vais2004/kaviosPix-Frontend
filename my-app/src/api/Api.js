@@ -60,7 +60,8 @@ export const putData = async (endpoint, body) => {
 export const deleteData = async (endpoint) => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.delete(`${BASE_URL}${endpoint}`, body, {
+
+    const response = await axios.delete(`${BASE_URL}${endpoint}`, {
       headers: token ? { Authorization: `Bearer ${token}` } : {},
     });
     return response.data;
@@ -71,6 +72,6 @@ export const deleteData = async (endpoint) => {
   }
 };
 
-export const dhareAlbum = async (albumId, email) => {
+export const shareAlbum = async (albumId, email) => {
   return postData(`/albums/${albumId}/share`, { email });
 };
