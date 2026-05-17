@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const BASE_URL = "http://localhost:4000"; // backend URL
-export const BASE_URL = ""; //backend url
+export const BASE_URL = "https://kavios-pix-backend-nine.vercel.app/"; //backend url
 
 const getToken = () => localStorage.getItem("token");
 

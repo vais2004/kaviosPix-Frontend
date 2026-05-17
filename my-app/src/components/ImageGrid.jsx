@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {FaTag,FaStar,FaTrash} from 'react-icons'
 import BASE_URL from "../api/Api";
 import axios from "axios";
 
@@ -73,7 +74,7 @@ export default function ImageGrid() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.post(
+      const response = await axios.post(
         `${BASE_URL}/albums/${albumId}/images/${imageId}/comments`,
         { comment: commentText },
         { headers: { Authorization: `Bearer ${token}` } },
@@ -82,7 +83,7 @@ export default function ImageGrid() {
       setImageList((prev) =>
         prev.map((img) =>
           img.imageId === imageId
-            ? { ...img, comments: res.data.image.comments }
+            ? { ...img, comments: response.data.image.comments }
             : img,
         ),
       );
@@ -106,7 +107,7 @@ export default function ImageGrid() {
         { headers: { Authorization: `Bearer ${token}` } },
       );
 
-      const formatted = res.data.map((img) => ({
+      const formatted = response.data.map((img) => ({
         imageId: img._id,
         imageUrl: img.imageUrl,
         comments: img.comments || [],
