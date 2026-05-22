@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserIdFromToken } from "../api/Api";
+import { deleteData, getUserIdFromToken } from "../api/Api";
 
-export default function AlbumCard() {
+export default function AlbumCard({ album, onEdit, onShare }) {
   const navigate = useNavigate();
   const userId = getUserIdFromToken();
   const isOwner = album.ownerId === userId;

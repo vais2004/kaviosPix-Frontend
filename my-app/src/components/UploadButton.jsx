@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function UploadButton() {
+export default function UploadButton({ albumId }) {
   const navigate = useNavigate();
   return (
     <button
