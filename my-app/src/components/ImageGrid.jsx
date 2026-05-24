@@ -11,7 +11,7 @@ export default function ImageGrid({ images, albumId }) {
   const [filteredImages, setFilteredImages] = useState([]);
 
   useEffect(() => {
-    const formatted = imageList.map((img) => ({
+    const formatted = images.map((img) => ({
       imageId: img._id,
       imageUrl: img.imageUrl,
       comments: img.comments || [],

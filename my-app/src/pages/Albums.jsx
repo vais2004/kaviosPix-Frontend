@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getData, postData, putData } from "../api/Api";
+import { getData, postData } from "../api/Api";
 import AlbumCard from "../components/AlbumCard";
 
 export default function Albums() {
