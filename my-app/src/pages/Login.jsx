@@ -12,7 +12,7 @@ export default function Login() {
     const token = searchParams.get("token");
     if (token) {
       login(token);
-      navigate("albums");
+      navigate("/albums");
     }
   }, [searchParams, login, navigate]);
 

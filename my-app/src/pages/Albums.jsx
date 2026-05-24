@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getData, postData } from "../api/Api";
+import { getData, postData, putData } from "../api/Api";
 import AlbumCard from "../components/AlbumCard";
 
 export default function Albums() {
@@ -59,7 +59,7 @@ export default function Albums() {
 
   const handleUpdateAlbum = async (e) => {
     e.preventDefault();
-    const result = await getData(`/albums/${editAlbum.albumId}`, {
+    const result = await putData(`/albums/${editAlbum.albumId}`, {
       description: editAlbum.description,
     });
 
@@ -213,7 +213,7 @@ export default function Albums() {
             zIndex: 1055,
           }}>
           <div className="modal-dialog">
-            <div className="modal-contect">
+            <div className="modal-content">
               <form onSubmit={handleShareAlbum}>
                 <div className="modal-header">
                   <h5 className="modal-title">Share Album</h5>
