@@ -27,7 +27,10 @@ function App() {
           path="/albums/:albumId"
           element={token ? <AlbumDetails /> : <Navigate to="/" />}
         />
-        <Route path="/albums/:albumId/upload" element={<UploadForm />} />
+        <Route
+          path="/albums/:albumId/upload"
+          element={token ? <UploadForm /> : <Navigate to="/" />}
+        />
       </Routes>
     </BrowserRouter>
   );

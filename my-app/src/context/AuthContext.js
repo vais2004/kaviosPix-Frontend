@@ -10,9 +10,34 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(token ? jwtDecode(token) : null);
   const [loading, setLoading] = useState(true);
 
+  // useEffect(() => {
+  //   const savedToken = localStorage.getItem("token");
+  //   if (savedToken) setToken(savedToken);
+  //   setLoading(false);
+  // }, []);
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
-    if (savedToken) setToken(savedToken);
+
+    if (savedToken) {
+      try {
+        const decoded = jwtDecode(savedToken);
+
+        if (decoded.exp * 1000 < Date.now()) {
+          localStorage.removeItem("token");
+          setToken(null);
+          setUser(null);
+        } else {
+          setToken(savedToken);
+          setUser(decoded);
+        }
+      } catch (error) {
+        console.log("Invalid token");
+        localStorage.removeItem("token");
+        setToken(null);
+        setUser(null);
+      }
+    }
+
     setLoading(false);
   }, []);
 
