@@ -11,6 +11,13 @@ export default function ImageGrid({ images, albumId }) {
   const [filteredImages, setFilteredImages] = useState([]);
 
   useEffect(() => {
+    if (!images || !Array.isArray(images)) {
+      setImageList([]);
+      setFavorites([]);
+      setFilteredImages([]);
+      return;
+    }
+
     const formatted = images.map((img) => ({
       imageId: img._id,
       imageUrl: img.imageUrl,
@@ -122,7 +129,9 @@ export default function ImageGrid({ images, albumId }) {
 
   const handleToggleView = () => setShowFavoritesOnly((prev) => !prev);
 
-  const displayList = showFavoritesOnly ? favorites : filteredImages;
+  const displayList = showFavoritesOnly
+    ? favorites || []
+    : filteredImages || [];
 
   return (
     <div className="mt-3">
