@@ -71,6 +71,8 @@ export default function Albums() {
       );
       setEditAlbum(null);
       setShowModal(false);
+
+      setNewAlbums({ name: "", description: "" });
     } else {
       alert("Failed to update album");
     }
@@ -176,12 +178,11 @@ export default function Albums() {
                     <textarea
                       name="description"
                       className="form-control"
-                      placeholder="Enter album description"
-                      rows="3"
                       value={
                         editAlbum ? editAlbum.description : newAlbum.description
                       }
-                      onChange={handleChange}></textarea>
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div className="modal-footer">
@@ -227,13 +228,6 @@ export default function Albums() {
                     }}></button>
                 </div>
 
-                <div className="modal-body">
-                  <label className="form-label fw-semibold">Select User</label>
-                  <select
-                    className="form-select"
-                    value={selectedUser}
-                    onChange={(e) => setSelectedUser(e.target.value)}></select>
-                </div>
                 <div className="modal-body">
                   <label className="form-label fw-semibold">Select User</label>
                   <select

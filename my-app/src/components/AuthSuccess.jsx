@@ -9,6 +9,7 @@ export default function AuthSuccess() {
 
   useEffect(() => {
     const token = searchParams.get("token");
+
     if (token) {
       login(token);
       navigate("/albums");
@@ -16,5 +17,5 @@ export default function AuthSuccess() {
       navigate("/");
     }
   }, [searchParams, login, navigate]);
-  return <div>Logging in...</div>;
+  return null;
 }
