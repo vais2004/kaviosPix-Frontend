@@ -112,9 +112,10 @@ export default function Albums() {
   };
 
   return (
-    <>
+    <div style={{ backgroundColor: "#e4e4fc" }}>
       <Header />
-      <div className="container mt-4" style={{ backgroundColor: "#e4e4fc" }}>
+
+      <div className="container mt-4">
         <header className="container py-3 border-bottom">
           <div className="d-flex justify-content-between align-items-center">
             <h3 className="mb-0">Your Albums</h3>
@@ -295,6 +296,6 @@ export default function Albums() {
           )}
         </main>
       </div>
-    </>
+    </div>
   );
 }
