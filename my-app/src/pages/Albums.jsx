@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getData, postData, putData } from "../api/Api";
 import AlbumCard from "../components/AlbumCard";
+import logo from "../img/0200dc61-1c7a-4ad6-bf31-7ab2532d179b.png";
 
 export default function Albums() {
   const [albums, setAlbums] = useState([]);
@@ -108,161 +109,193 @@ export default function Albums() {
       alert(result?.message || "Failed to share album");
     }
   };
+  //console.log("Logo path:", logo);
+
   return (
     <div className="container mt-4">
-      <div className="d-flex justify-content-between align-items-center">
-        <h3>Your Albums</h3>
-        <button className="btn btn-primary" onClick={() => setShowModal(true)}>
-          + Add Album
-        </button>
-      </div>
+      <header className="container py-3 border-bottom">
+        <div className="d-flex justify-content-between align-items-center">
+          <img
+            src={logo}
+            alt="KaviosPix"
+            style={{ height: "80px", objectFit: "contain" }}
+          />
 
-      <div className="row mt-4">
-        {albums?.length > 0 ? (
-          albums.map((album) => (
-            <div key={album.albumId} className="col-md-3 mb-3">
-              <AlbumCard
-                album={album}
-                onEdit={() => openEditModal(album)}
-                onShare={() => openShareModal(album)}
-              />
-            </div>
-          ))
-        ) : (
-          <p className="text-muted mt-4">No Albums found.</p>
-        )}
-      </div>
+          <h3 className="mb-0">Your Albums</h3>
 
-      {showModal && (
-        <div
-          className="modal fade show"
-          style={{ display: "block", background: "rgba(0,0,0,0.5)" }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <form onSubmit={editAlbum ? handleUpdateAlbum : handleAddAlbum}>
-                <div className="modal-header">
-                  <h5 className="modal-title">
-                    {editAlbum ? "Edit Album" : "Add New Album"}
-                  </h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={() => {
-                      setEditAlbum(null);
-                      setShowModal(false);
-                    }}></button>
-                </div>
+          <button
+            className="btn btn-primary"
+            onClick={() => setShowModal(true)}>
+            + Add Album
+          </button>
+        </div>
+      </header>
 
-                <div className="modal-body">
-                  {!editAlbum && (
+      {/* // <div className="container mt-4">
+    //   <div className="d-flex justify-content-between align-items-center">
+    //     <img 
+    //       src={logo}
+    //       alt="kaviosPix"
+    //       className="mx-auto d-block mb-4"
+    //       style={{ height: "150px", objectFit: "contain" }}
+    //     />
+    //     <h3>Your Albums</h3>
+    //     <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+    //       + Add Album
+    //     </button>
+    //   </div>*/}
+      <main>
+        <div className="row mt-4">
+          {albums?.length > 0 ? (
+            albums.map((album) => (
+              <div key={album.albumId} className="col-md-3 mb-3">
+                <AlbumCard
+                  album={album}
+                  onEdit={() => openEditModal(album)}
+                  onShare={() => openShareModal(album)}
+                />
+              </div>
+            ))
+          ) : (
+            <p className="text-muted mt-4">No Albums found.</p>
+          )}
+        </div>
+
+        {showModal && (
+          <div
+            className="modal fade show"
+            style={{ display: "block", background: "rgba(0,0,0,0.5)" }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <form onSubmit={editAlbum ? handleUpdateAlbum : handleAddAlbum}>
+                  <div className="modal-header">
+                    <h5 className="modal-title">
+                      {editAlbum ? "Edit Album" : "Add New Album"}
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      onClick={() => {
+                        setEditAlbum(null);
+                        setShowModal(false);
+                      }}></button>
+                  </div>
+
+                  <div className="modal-body">
+                    {!editAlbum && (
+                      <div className="mb-3">
+                        <label className="form-label fw-semibold">
+                          Album Name
+                        </label>
+
+                        <input
+                          type="text"
+                          name="name"
+                          className="form-control"
+                          placeholder="Enter album name"
+                          value={newAlbum.name}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    )}
+
                     <div className="mb-3">
                       <label className="form-label fw-semibold">
-                        Album Name
+                        Description
                       </label>
-
-                      <input
-                        type="text"
-                        name="name"
+                      <textarea
+                        name="description"
                         className="form-control"
-                        placeholder="Enter album name"
-                        value={newAlbum.name}
+                        value={
+                          editAlbum
+                            ? editAlbum.description
+                            : newAlbum.description
+                        }
                         onChange={handleChange}
                       />
                     </div>
-                  )}
-
-                  <div className="mb-3">
-                    <label className="form-label fw-semibold">
-                      Description
-                    </label>
-                    <textarea
-                      name="description"
-                      className="form-control"
-                      value={
-                        editAlbum ? editAlbum.description : newAlbum.description
-                      }
-                      onChange={handleChange}
-                    />
                   </div>
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => {
-                      setEditAlbum(null);
-                      setShowModal(false);
-                    }}>
-                    Cancel
-                  </button>
-                  <button type="submit" className="btn btn-primary">
-                    {editAlbum ? "Update Album" : "Add Album"}
-                  </button>
-                </div>
-              </form>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => {
+                        setEditAlbum(null);
+                        setShowModal(false);
+                      }}>
+                      Cancel
+                    </button>
+                    <button type="submit" className="btn btn-primary">
+                      {editAlbum ? "Update Album" : "Add Album"}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {showShareModal && (
-        <div
-          className="modal fade show"
-          style={{
-            display: "block",
-            background: "rgba(0,0,0,0.5)",
-            zIndex: 1055,
-          }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <form onSubmit={handleShareAlbum}>
-                <div className="modal-header">
-                  <h5 className="modal-title">Share Album</h5>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    onClick={() => {
-                      setShowShareModal(false);
-                      setSelectedAlbum(null);
-                      setSelectedUser("");
-                    }}></button>
-                </div>
+        {showShareModal && (
+          <div
+            className="modal fade show"
+            style={{
+              display: "block",
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 1055,
+            }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <form onSubmit={handleShareAlbum}>
+                  <div className="modal-header">
+                    <h5 className="modal-title">Share Album</h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      onClick={() => {
+                        setShowShareModal(false);
+                        setSelectedAlbum(null);
+                        setSelectedUser("");
+                      }}></button>
+                  </div>
 
-                <div className="modal-body">
-                  <label className="form-label fw-semibold">Select User</label>
-                  <select
-                    className="form-select"
-                    value={selectedUser}
-                    onChange={(e) => setSelectedUser(e.target.value)}>
-                    <option value="">-- Select a user --</option>
-                    {users.map((user) => (
-                      <option key={user._id} value={user._id}>
-                        {user.name} ({user.email})
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                  <div className="modal-body">
+                    <label className="form-label fw-semibold">
+                      Select User
+                    </label>
+                    <select
+                      className="form-select"
+                      value={selectedUser}
+                      onChange={(e) => setSelectedUser(e.target.value)}>
+                      <option value="">-- Select a user --</option>
+                      {users.map((user) => (
+                        <option key={user._id} value={user._id}>
+                          {user.name} ({user.email})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => {
-                      setShowShareModal(false);
-                      setSelectedAlbum(null);
-                      setSelectedUser("");
-                    }}>
-                    Cancel
-                  </button>
-                  <button type="submit" className="btn btn-primary">
-                    Share
-                  </button>
-                </div>
-              </form>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => {
+                        setShowShareModal(false);
+                        setSelectedAlbum(null);
+                        setSelectedUser("");
+                      }}>
+                      Cancel
+                    </button>
+                    <button type="submit" className="btn btn-primary">
+                      Share
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </main>
     </div>
   );
 }
