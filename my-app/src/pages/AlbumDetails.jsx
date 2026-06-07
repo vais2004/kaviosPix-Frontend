@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getData } from "../api/Api";
 import UploadButton from "../components/UploadButton";
 import ImageGrid from "../components/ImageGrid";
+import Header from "../components/Header";
 
 export default function AlbumDetails() {
   const { albumId } = useParams();
@@ -24,6 +25,7 @@ export default function AlbumDetails() {
 
   return (
     <div className="container mt-4">
+      <Header/>
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h3>Album Images</h3>
         <div className="d-flex gap-2">
