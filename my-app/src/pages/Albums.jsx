@@ -114,7 +114,7 @@ export default function Albums() {
   return (
     <>
       <Header />
-      <div className="container mt-4">
+      <div className="container mt-4" style={{ backgroundColor: "#e4e4fc" }}>
         <header className="container py-3 border-bottom">
           <div className="d-flex justify-content-between align-items-center">
             <h3 className="mb-0">Your Albums</h3>

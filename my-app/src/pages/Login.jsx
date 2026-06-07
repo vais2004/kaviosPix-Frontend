@@ -24,10 +24,10 @@ export default function Login() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center bg-light vh-100">
-      <div
-        className="card border-1 p-5 text-center"
-        style={{ width: "400px", backgroundColor: "#ffffff" }}>
+    <div
+      className="d-flex justify-content-center align-items-center vh-100"
+      style={{ backgroundColor: "#e4e4fc" }}>
+      <div className="card border-1 p-5 text-center" style={{ width: "400px" }}>
         <img
           src={logo}
           alt="kaviosPix"
