@@ -110,9 +110,6 @@ export default function Albums() {
       alert(result?.message || "Failed to share album");
     }
   };
-  //console.log("Logo path:", logo);
-  console.log("showModal:", showModal);
-  console.log("showShareModal:", showShareModal);
 
   return (
     <>
@@ -120,12 +117,6 @@ export default function Albums() {
       <div className="container mt-4">
         <header className="container py-3 border-bottom">
           <div className="d-flex justify-content-between align-items-center">
-            <img
-              src={logo}
-              alt="KaviosPix"
-              style={{ height: "80px", objectFit: "contain" }}
-            />
-
             <h3 className="mb-0">Your Albums</h3>
 
             <button
