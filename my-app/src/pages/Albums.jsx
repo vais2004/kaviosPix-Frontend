@@ -118,6 +118,7 @@ export default function Albums() {
         <header className="container py-3 border-bottom">
           <div className="d-flex justify-content-between align-items-center">
             <h3 className="mb-0">Your Albums</h3>
+            <p className="text-muted">save your memories</p>
 
             <button
               className="btn btn-primary"
